@@ -3,7 +3,7 @@ import os
 from discord.ext import commands
 import config
 
-TOKEN = config.TOK
+TOKEN = config.TOKEN
 PREFIX = config.PREFIX
 STATUS = config.STATUS
 OWNER_UID = config.OWNER_UID
