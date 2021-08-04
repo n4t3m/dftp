@@ -22,6 +22,16 @@ class DFTP(commands.Cog):
         if message.author.id != self.OWNER_UID:
             return
         if message.channel.name == "uploads" and message.guild.id == self.GUILD_UID:
+            if len(message.attachments)==0:
+                resp = await message.channel.send("Message Sent Without Attachments, removing")
+                await asyncio.sleep(1)
+                await resp.delete()
+                await message.delete()
+                return
+            else:
+                for f in message.attachments:
+                    print(f.filename)
+                return
             return
         return
 
