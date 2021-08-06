@@ -3,6 +3,7 @@ from discord.ext import commands
 import config
 import os
 import asyncio
+import datetime
 
 class DFTP(commands.Cog):
 
@@ -30,7 +31,18 @@ class DFTP(commands.Cog):
                 return
             else:
                 for f in message.attachments:
-                    print(f.filename)
+                    try:
+                        file_content = await f.read()
+                        out_name = f.filename
+                        if f.filename in os.listdir(os.curdir):
+                            out_name+="_"+str(datetime.datetime.utcnow()).replace(' ', '_')
+                        out = open(f'./{f.filename}', 'wb')
+                        out.write(file_content)
+                        out.close()
+                        await message.add_reaction('✔️')
+                    except:
+                        await message.add_reaction('❌')
+
                 return
             return
         return
